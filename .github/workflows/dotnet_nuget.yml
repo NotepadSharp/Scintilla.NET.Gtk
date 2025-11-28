@@ -14,7 +14,7 @@ jobs:
       Solution_Name: Scintilla.NET.Abstractions.sln
       App_Project_Directory: Scintilla.NET.Abstractions
       App_Project_Path: Scintilla.NET.Abstractions\Scintilla.NET.Abstractions.csproj
-      NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
+      NUGET_APIKEY: ${{ secrets.NUGET_API_KEY }}
       NUGETAPI: ${{ secrets.NUGETAPI }}      
       GH_PACKAGES_APIKEY: ${{ secrets.GH_PACKAGES_APIKEY }}
       PACKAGESAPI: ${{ secrets.PACKAGESAPI }}
