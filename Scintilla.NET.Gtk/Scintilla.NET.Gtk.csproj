@@ -62,6 +62,7 @@
 		   <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		   <PackagePath>runtimes/linux-x64/native/</PackagePath>
 		   <Pack>true</Pack>
+	   </None>
 	   <!-- Windows native libraries (x64) -->
 	   <None Include="runtimes/win-x64/Lexilla.dll" Condition="Exists('runtimes/win-x64/Lexilla.dll')">
 		   <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
