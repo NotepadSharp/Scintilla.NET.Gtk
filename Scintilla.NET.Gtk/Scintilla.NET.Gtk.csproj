@@ -43,6 +43,10 @@
 		  <Pack>True</Pack>
 		  <PackagePath>\</PackagePath>
 		</None>
+		<None Include="..\NotepadSharp_logo.png">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
 		<None Include="Scintilla.NET.Gtk.targets">
 			<PackagePath>build\</PackagePath>
 			<Pack>true</Pack>
