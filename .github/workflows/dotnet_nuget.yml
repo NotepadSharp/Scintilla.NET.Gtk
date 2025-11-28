@@ -1,12 +1,8 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: .NET NuGet Release
 
 on:
   release:
     types: created
-    
   workflow_dispatch:
 
 jobs:
@@ -25,26 +21,30 @@ jobs:
       NUGETCONFIG: ${{ secrets.NUGETCONFIG }}
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 10.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore --configuration Release       
-    - name: Decode nuget.config
-      if: ${{ github.event_name != 'pull_request' }}
-      run: |
-        currentDirectory=`pwd`
-        nuget_config_bytes=`echo $NUGETCONFIG | base64 --decode`
-        nugetConfigFile="$currentDirectory/nuget.config"
-        echo "$nuget_config_bytes" > $nugetConfigFile
-    - name: NuGet push
-      if: ${{ github.event_name != 'pull_request' }}
-      run: |
-        find . -name '*Scintilla.NET.Gtk*.nupkg' | while read line; do
-          dotnet nuget push $line --api-key $NUGET_APIKEY --source $NUGETAPI --skip-duplicate
-          dotnet nuget push $line --api-key $GH_PACKAGES_APIKEY --source $PACKAGESAPI --skip-duplicate
-        done
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore --configuration Release       
+
+      # FIX: Using printf %s and direct redirection prevents leading whitespace
+      # or BOM characters from being added during the decoding process, which
+      # caused the "Unexpected XML declaration" error.
+      - name: Decode nuget.config
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          # Use printf %s to print the secret without an added newline, 
+          # then pipe the base64 string directly to the decoder and the output file.
+          printf %s "$NUGETCONFIG" | base64 --decode > nuget.config
+
+      - name: NuGet push
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          find . -name '*Scintilla.NET.Gtk*.nupkg' | while read line; do
+            dotnet nuget push $line --api-key $NUGET_APIKEY --source $NUGETAPI --skip-duplicate
+            dotnet nuget push $line --api-key $GH_PACKAGES_APIKEY --source $PACKAGESAPI --skip-duplicate
+          done
