@@ -45,7 +45,7 @@ You will store the sensitive information (like API keys) as secrets in your fork
 |**`NUGET_APIKEY`**|_Paste the API key from Step 1_|The actual key used to authenticate with NuGet.org.|
 |**`NUGETAPI`**|`https://api.nuget.org/v3/index.json`|The endpoint for the public NuGet feed.|
 |**`GH_PACKAGES_APIKEY`**|_See Step 3_|A GitHub Personal Access Token (PAT) for GitHub Packages.|
-|**`PACKAGESAPI`**|`https://nuget.pkg.github.com/OWNER/index.json`|The GitHub Packages feed URL. **Replace `OWNER` with your GitHub username or organization name.**|
+|**`PACKAGESAPI`**|`https://nuget.pkg.github.com/NotepadSharp/index.json`|The GitHub Packages feed URL. **Replace `OWNER` with your GitHub username or organization name.**|
 |**`NUGETCONFIG`**|_See Step 4_|A Base64-encoded `nuget.config` file (used for multi-feed authentication).|
 
 ---
