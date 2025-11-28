@@ -9,7 +9,7 @@
 		<Product>Scintilla.NET.Gtk</Product>
 		<Description>Source Editing Component based on Scintilla 5 series.</Description>
 		<Copyright>Copyright © VPKSoft 2023.</Copyright>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<DocumentationFile>bin\$(Configuration)\Scintilla.NET.Gtk.xml</DocumentationFile>
 		<UseWindowsForms>true</UseWindowsForms>
