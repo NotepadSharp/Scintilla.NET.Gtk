@@ -122,14 +122,14 @@
 			<Link>runtimes\osx-arm64\native\libscintilla.dylib</Link>
 		</None>
 			<!-- Include native binaries for NuGet packaging and output directory -->
-			<None Include="native\win-x64\ScintillaNET.dll">
+			<None Include="win-x64\ScintillaNET.dll">
 				<Pack>true</Pack>
-				<PackagePath>runtimes/win-x64/</PackagePath>
+				<PackagePath>runtimes/win-x64/native/</PackagePath>
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</None>
-			<None Include="native/linux-x64/libscintilla.so">
+			<None Include="linux-x64/libscintilla.so">
 				<Pack>true</Pack>
-				<PackagePath>runtimes/linux-x64/</PackagePath>
+				<PackagePath>runtimes/linux-x64/native/</PackagePath>
 				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			</None>
 			<!-- Add more platforms as needed -->
