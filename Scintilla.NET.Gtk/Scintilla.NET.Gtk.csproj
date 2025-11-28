@@ -20,7 +20,7 @@
 		<Title>Scintilla.NET.Gtk</Title>
 		<PackageProjectUrl>https://github.com/NotepadSharp/Scintilla.NET.Gtk</PackageProjectUrl>
         <PackageId>NotepadSharp.Scintilla.NET.Gtk</PackageId>
-		<PackageIcon>NotepadSharp_logo</PackageIcon>
+		<PackageIcon>NotepadSharp_logo.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://nuget.pkg.github.com/NotepadSharp/index.json</RepositoryUrl>
 		<PackageTags>scintilla;gtk;wrapper;source-editing</PackageTags>
