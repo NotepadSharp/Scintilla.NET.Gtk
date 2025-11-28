@@ -2,7 +2,7 @@
 /*
 MIT License
 
-Copyright(c) 2023 Petteri Kautonen
+Copyright(c) 2023-2025 Petteri Kautonen, pdavis68
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,52 +25,30 @@ SOFTWARE.
 #endregion
 
 using System;
-using ScintillaNet.Abstractions;
-using ScintillaNet.Gtk.Platform;
 
-namespace ScintillaNet.Gtk;
+namespace ScintillaNet.Gtk.Platform;
 
 /// <summary>
-/// Platform-agnostic handler for the Scintilla's Lexilla library.
-/// Implements the <see cref="ILexilla" />
+/// Interface for platform-specific Lexilla native library bindings.
 /// </summary>
-/// <seealso cref="ILexilla" />
-public class Lexilla: ILexilla
+public interface ILexillaNative : IDisposable
 {
-    private readonly ILexillaNative _native;
+    /// <summary>
+    /// Gets the number of available lexers.
+    /// </summary>
+    int LexerCount { get; }
     
     /// <summary>
-    /// Initializes a new instance of the <see cref="Lexilla"/> class.
+    /// Gets the name of a lexer by index.
     /// </summary>
-    public Lexilla() : this(NativeLibraryLoader.CreateLexillaNative())
-    {
-    }
+    /// <param name="index">The lexer index.</param>
+    /// <returns>The lexer name.</returns>
+    string GetLexerName(uint index);
     
     /// <summary>
-    /// Initializes a new instance of the <see cref="Lexilla"/> class with a specific native implementation.
+    /// Creates a lexer instance by name.
     /// </summary>
-    /// <param name="native">The platform-specific native implementation.</param>
-    internal Lexilla(ILexillaNative native)
-    {
-        _native = native;
-    }
-    
-    /// <inheritdoc cref="ILexilla.LexerCount"/>
-    public int LexerCount => _native.LexerCount;
-
-    /// <summary>
-    /// Gets the name of the lexer.
-    /// </summary>
-    /// <param name="index">The index.</param>
-    /// <returns>System.String.</returns>
-    public string GetLexerName(uint index)
-    {
-        return _native.GetLexerName(index);
-    }
-
-    /// <inheritdoc />
-    public IntPtr CreateLexer(string lexerName)
-    {
-        return _native.CreateLexer(lexerName);
-    }
+    /// <param name="name">The lexer name.</param>
+    /// <returns>Pointer to the lexer instance.</returns>
+    IntPtr CreateLexer(string name);
 }

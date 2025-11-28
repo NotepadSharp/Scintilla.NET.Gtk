@@ -38,6 +38,7 @@ using ScintillaNet.Abstractions.Structs;
 using ScintillaNet.Gtk.Collections;
 using ScintillaNet.Gtk.EventArguments;
 using ScintillaNet.Gtk.GdkUtils;
+using ScintillaNet.Gtk.Platform;
 using Color = Gdk.Color;
 using Image = Gtk.Image;
 using Key = Gdk.Key;
@@ -56,12 +57,22 @@ using Keys = Gdk.Key;
 /// </summary>
 public class Scintilla : Widget, IScintillaLinux
 {
+    private readonly IScintillaNative _native;
     
     /// <summary>
     /// Initializes a new instance of the <see cref="Scintilla" /> class.
     /// </summary>
-    public Scintilla() : base(scintilla_new())
+    public Scintilla() : this(NativeLibraryLoader.CreateScintillaNative())
     {
+    }
+    
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Scintilla" /> class with a specific native implementation.
+    /// </summary>
+    /// <param name="native">The platform-specific native implementation.</param>
+    internal Scintilla(IScintillaNative native) : base(native.CreateScintilla())
+    {
+        _native = native;
         editor = base.Raw;
         Styles = new StyleCollection(this);
         Margins = new MarginCollection(this);
@@ -212,26 +223,6 @@ public class Scintilla : Widget, IScintillaLinux
     #endregion
 
     #region Native
-    /// <summary>
-    /// Create a new Scintilla widget. The returned pointer can be added to a container and displayed in the same way as other widgets.
-    /// </summary>
-    /// <returns>IntPtr.</returns>
-    [DllImport("libscintilla", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
-    private static extern IntPtr scintilla_new();
-
-    /// <summary>
-    /// The main entry point allows sending any of the messages described in this document.
-    /// </summary>
-    /// <param name="ptr">The ScintillaObject pointer.</param>
-    /// <param name="iMessage">The message identifier to send to the control.</param>
-    /// <param name="wParam">The message <c>wParam</c> field.</param>
-    /// <param name="lParam">The message <c>lParam</c> field.</param>
-    /// <returns>IntPtr.</returns>
-    // ReSharper disable once StringLiteralTypo
-    [DllImport("libscintilla", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
-    private static extern IntPtr scintilla_send_message(IntPtr ptr, int iMessage, IntPtr wParam, IntPtr lParam);
-
-
     readonly IntPtr editor;
 
 
@@ -253,7 +244,7 @@ public class Scintilla : Widget, IScintillaLinux
     /// <inheritdoc cref="IScintillaApi.SetParameter"/>
     public IntPtr SetParameter(int message, IntPtr wParam, IntPtr lParam)
     {
-        return scintilla_send_message(editor, message, wParam, lParam);
+        return _native.SendMessage(editor, message, wParam, lParam);
     }
 
     /// <inheritdoc cref="IScintillaApi.DirectMessage(int)"/>
@@ -277,7 +268,7 @@ public class Scintilla : Widget, IScintillaLinux
     /// <inheritdoc cref="IScintillaApi.DirectMessage(int, IntPtr, IntPtr)"/>
     public IntPtr DirectMessage(IntPtr sciPtr, int msg, IntPtr wParam, IntPtr lParam)
     {
-        return scintilla_send_message(sciPtr, msg, wParam, lParam);
+        return _native.SendMessage(sciPtr, msg, wParam, lParam);
     }
     #endregion
 

@@ -46,15 +46,75 @@
 			<PackagePath>build\</PackagePath>
 			<Pack>true</Pack>
 		</None>
-		<None Include="liblexilla.so">
+		
+		<!-- Linux native libraries (x64) -->
+		<None Include="liblexilla.so" Condition="Exists('liblexilla.so')">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>build\</PackagePath>
+			<PackagePath>runtimes\linux-x64\native\</PackagePath>
 			<Pack>true</Pack>
+			<Link>runtimes\linux-x64\native\liblexilla.so</Link>
 		</None>
-		<None Include="libscintilla.so">
+		<None Include="libscintilla.so" Condition="Exists('libscintilla.so')">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<PackagePath>build\</PackagePath>
+			<PackagePath>runtimes\linux-x64\native\</PackagePath>
 			<Pack>true</Pack>
+			<Link>runtimes\linux-x64\native\libscintilla.so</Link>
+		</None>
+		
+		<!-- Windows native libraries (x64) - to be added -->
+		<None Include="runtimes\win-x64\native\lexilla.dll" Condition="Exists('runtimes\win-x64\native\lexilla.dll')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes\win-x64\native\</PackagePath>
+			<Pack>true</Pack>
+			<Link>runtimes\win-x64\native\lexilla.dll</Link>
+		</None>
+		<None Include="runtimes\win-x64\native\scintilla.dll" Condition="Exists('runtimes\win-x64\native\scintilla.dll')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes\win-x64\native\</PackagePath>
+			<Pack>true</Pack>
+			<Link>runtimes\win-x64\native\scintilla.dll</Link>
+		</None>
+		
+		<!-- Windows native libraries (x86) - to be added -->
+		<None Include="runtimes\win-x86\native\lexilla.dll" Condition="Exists('runtimes\win-x86\native\lexilla.dll')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes\win-x86\native\</PackagePath>
+			<Pack>true</Pack>
+			<Link>runtimes\win-x86\native\lexilla.dll</Link>
+		</None>
+		<None Include="runtimes\win-x86\native\scintilla.dll" Condition="Exists('runtimes\win-x86\native\scintilla.dll')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes\win-x86\native\</PackagePath>
+			<Pack>true</Pack>
+			<Link>runtimes\win-x86\native\scintilla.dll</Link>
+		</None>
+		
+		<!-- macOS native libraries (x64) - to be added -->
+		<None Include="runtimes\osx-x64\native\liblexilla.dylib" Condition="Exists('runtimes\osx-x64\native\liblexilla.dylib')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes\osx-x64\native\</PackagePath>
+			<Pack>true</Pack>
+			<Link>runtimes\osx-x64\native\liblexilla.dylib</Link>
+		</None>
+		<None Include="runtimes\osx-x64\native\libscintilla.dylib" Condition="Exists('runtimes\osx-x64\native\libscintilla.dylib')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes\osx-x64\native\</PackagePath>
+			<Pack>true</Pack>
+			<Link>runtimes\osx-x64\native\libscintilla.dylib</Link>
+		</None>
+		
+		<!-- macOS native libraries (arm64) - to be added -->
+		<None Include="runtimes\osx-arm64\native\liblexilla.dylib" Condition="Exists('runtimes\osx-arm64\native\liblexilla.dylib')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes\osx-arm64\native\</PackagePath>
+			<Pack>true</Pack>
+			<Link>runtimes\osx-arm64\native\liblexilla.dylib</Link>
+		</None>
+		<None Include="runtimes\osx-arm64\native\libscintilla.dylib" Condition="Exists('runtimes\osx-arm64\native\libscintilla.dylib')">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<PackagePath>runtimes\osx-arm64\native\</PackagePath>
+			<Pack>true</Pack>
+			<Link>runtimes\osx-arm64\native\libscintilla.dylib</Link>
 		</None>
 	</ItemGroup>
 </Project>
