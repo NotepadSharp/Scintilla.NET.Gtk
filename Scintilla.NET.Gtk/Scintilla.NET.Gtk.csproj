@@ -57,11 +57,13 @@
 		   <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		   <PackagePath>runtimes/linux-x64/native/</PackagePath>
 		   <Pack>true</Pack>
+		   <Link>liblexilla.so</Link>
 	   </None>
 	   <None Include="runtimes/linux-x64/libscintilla.so" Condition="Exists('runtimes/linux-x64/libscintilla.so')">
 		   <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		   <PackagePath>runtimes/linux-x64/native/</PackagePath>
 		   <Pack>true</Pack>
+		   <Link>libscintilla.so</Link>
 	   </None>
 	   <!-- Windows native libraries (x64) -->
 	   <None Include="runtimes/win-x64/Lexilla.dll" Condition="Exists('runtimes/win-x64/Lexilla.dll')">
